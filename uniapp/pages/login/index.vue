@@ -39,9 +39,9 @@ export default {
 				timerProgressBar: true,
 				timerProgressBarColor: 'rgba(0, 0, 0, 0.2)',
 				url: {
-					info: 'https://captcha.lnsec.cn/captcha/rotate',
-					check: 'https://captcha.lnsec.cn/captcha/verify',
-					img: 'https://captcha.lnsec.cn/captcha/img',
+					info: 'https://127.0.0.1/captcha/rotate',
+					check: 'https://127.0.0.1/captcha/verify',
+					img: 'https://127.0.0.1/captcha/img',
 				},
 			},
 		};
