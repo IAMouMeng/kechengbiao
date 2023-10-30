@@ -1,0 +1,69 @@
+{
+	"pages": [
+		{
+			"path": "pages/class/index",
+			"style": {
+				"navigationBarTitleText": "课程表"
+			}
+		},{
+			"path": "pages/score/index",
+			"style": {
+				"navigationBarTitleText": "成绩单"
+			}
+		},{
+			"path": "pages/my/index",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},{
+			"path": "pages/my/info",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		},{
+			"path": "pages/my/privacy",
+			"style": {
+				"navigationBarTitleText": "隐私协议"
+			}
+		},{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "教务系统登录"
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#465CFF",
+		"backgroundColor": "#FFFFFF",
+		"list": [
+			{
+				"pagePath": "pages/class/index",
+				"text": "课程表",
+				"iconPath": "static/images/tabbar/layout_default_3x.png",
+				"selectedIconPath": "static/images/tabbar/layout_selected_3x.png"
+			},
+			{
+				"pagePath": "pages/score/index",
+				"text": "成绩单",
+				"iconPath": "static/images/tabbar/mod_default_3x.png",
+				"selectedIconPath": "static/images/tabbar/mod_selected_3x.png"
+			},
+			{
+				"pagePath": "pages/my/index",
+				"text": "我的",
+				"iconPath": "static/images/tabbar/my_default_3x.png",
+				"selectedIconPath": "static/images/tabbar/my_selected_3x.png"
+			}
+		]
+	},
+	"subPackages": [],
+	"preloadRule": {
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uView",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF"
+	}
+}

@@ -1,0 +1,9 @@
+pyjwt==2.7.0
+aiomysql==0.2.0
+sqlalchemy==1.4.48
+sanic==23.3.0
+ddddocr==1.4.7
+sanic_jinja2==2022.11.11
+Pillow==8.4.0
+beautifulsoup4==4.12.2
+requests
