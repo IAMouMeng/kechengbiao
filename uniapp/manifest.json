@@ -44,7 +44,7 @@
                 "ad" : {},
                 "share" : {
                     "weixin" : {
-                        "appid" : "wx64d8a066003d7d9b",
+                        "appid" : "11111111111111111",
                         "UniversalLinks" : ""
                     }
                 }
@@ -85,7 +85,7 @@
     },
     "quickapp" : {},
     "mp-weixin" : {
-        "appid" : "wx52dfcedba8f08bc0",
+        "appid" : "11111111111111",
         "setting" : {
             "urlCheck" : false,
             "es6" : false,
