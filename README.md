@@ -3,7 +3,7 @@
 
 <img src="images/课程查询.jpg" width="128" align="right"/>
 <img src="images/成绩查询.jpg" width="128" align="right"/>
-<img src="images/个人中心.jpg" width="128" align="right"/>
+<img src="images/个人主页.jpg" width="128" align="right"/>
 
 # 安装教程
 后边再说
