@@ -1,3 +1,3 @@
 module.exports = {
-    baseUrl: 'https://api.score.lnsec.cn/'
+    baseUrl: 'http://127.0.0.1/'
 }
