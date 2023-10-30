@@ -190,7 +190,7 @@ export default {
 			},
 			loading: false,
 			semester: '',
-			todayWeek: 0,
+			todayWeek: 1,
 			showWeek: 1,
 			weeks: [],
 			coursNew: {},
@@ -424,6 +424,7 @@ export default {
 			for (const [key, value] of Object.entries(data)) {
 				value.forEach((item) => {
 					if (!this.checkAndCount(key, item)) {
+						console.log("3-->",value);
 						item.blocks = item.info.periods.length;
 						item.isCourse = 1;
 						this.courseList[key].push(item);
