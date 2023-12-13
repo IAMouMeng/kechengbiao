@@ -1,8 +1,8 @@
 {
     "name" : "柯程表",
-    "appid" : "__UNI__ABCDEFG",
+    "appid" : "__UNI__EB11E4B",
     "description" : "基于 Uview UI 开发的一款便于学生成绩及课表查询小程序",
-    "versionName" : "1.0.1",
+    "versionName" : "2.0.36",
     "versionCode" : 1,
     "transformPx" : false,
     "app-plus" : {
@@ -44,7 +44,7 @@
                 "ad" : {},
                 "share" : {
                     "weixin" : {
-                        "appid" : "11111111111111111",
+                        "appid" : "wx64d8a066003d7d9b",
                         "UniversalLinks" : ""
                     }
                 }
@@ -85,7 +85,7 @@
     },
     "quickapp" : {},
     "mp-weixin" : {
-        "appid" : "11111111111111",
+        "appid" : "wx52dfcedba8f08bc0",
         "setting" : {
             "urlCheck" : false,
             "es6" : false,
@@ -126,7 +126,7 @@
                 "enable" : false
             }
         },
-        "title" : "uView UI",
+        "title" : "柯程表",
         "sdkConfigs" : {
             "maps" : {
                 "qqmap" : {

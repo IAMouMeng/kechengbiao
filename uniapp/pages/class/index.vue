@@ -180,7 +180,7 @@ export default {
 			firstUseModel: {
 				show: false,
 				title: '注意',
-				content: '别忘了切换为当前周！课表处于试验阶段，请谨慎使用！！！',
+				content: '您的账号密码储存于您本机微信 localStorage 内，我们不会私自储存您的密码。课程表处于实验阶段，请您谨慎使用！！！',
 				confirmText: '知道啦！'
 			},
 			weekList: {
@@ -358,8 +358,8 @@ export default {
 			return `${70 * blocks - 16}px`;
 		},
 		mathColor() {
-			const randomR = Math.random() * 38;
-			const randomG = Math.random() * 256;
+			const randomR = Math.random() * 120;
+			const randomG = Math.random() * 150;
 			const randomB = Math.random() * 256;
 			return `rgba(${randomR},${randomG},${randomB},0.5)`;
 		},

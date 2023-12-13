@@ -19,7 +19,7 @@
 			</form>
 		</view>
 	</view>
-</view></template>
+</template>
 <script>
 import { userLogin } from '../../common/api'
 
@@ -39,14 +39,15 @@ export default {
 				timerProgressBar: true,
 				timerProgressBarColor: 'rgba(0, 0, 0, 0.2)',
 				url: {
-					info: 'https://127.0.0.1/captcha/rotate',
-					check: 'https://127.0.0.1/captcha/verify',
-					img: 'https://127.0.0.1/captcha/img',
+					info: 'https://captcha.lnsec.cn/captcha/rotate',
+					check: 'https://captcha.lnsec.cn/captcha/verify',
+					img: 'https://captcha.lnsec.cn/captcha/img',
 				},
 			},
 		};
 	},
 	onShow() {
+		const self = this
 		uni.removeStorage({
 			key: 'coursNew',
 		});
@@ -56,7 +57,18 @@ export default {
 		uni.removeStorage({
 			key : 'year'
 		});
-
+		uni.getStorage({
+            key: 'username',
+            success: function (res) {
+                self.username = res.data
+            }
+        });
+        uni.getStorage({
+            key: 'password',
+            success: function (res) {
+                self.password = res.data
+            }
+        });
 	},
 	methods: {
 		login() {
@@ -91,6 +103,14 @@ export default {
 				"password": this.password,
 				"token": token
 			}).then(res => {
+				uni.setStorage({
+					key: 'username',
+					data: this.username,
+				});
+				uni.setStorage({
+					key: 'password',
+					data: this.password,
+				});
 				uni.setStorage({
 					key: 'year',
 					data: this.username.slice(0, 4),

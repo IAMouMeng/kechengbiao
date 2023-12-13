@@ -22,62 +22,61 @@
                     </view> -->
                 </u-col>
             </u-row>
-            <u-row customStyle="margin-top:20px;margin-bottom: 10px;padding-left:20px;padding-right:20px;">
+            <u-row customStyle="margin-top:20px;margin-bottom: 10px;padding:10px 30px;">
                 <u-col>
                     <view>
-                        <u-steps :dot="true" current="0" direction="column">
-                            <u-steps-item :title="item.year + '年'" :activeIcon="true" v-for="item in scoreList">
-                                <view slot="desc"><text class="title">{{ item.semester == '1' ? '上学期' : '下学期' }}</text>
-                                    <view class="score-container">
-                                        <view v-if="item.exams != null && item.exams.length == 0">
-                                            <u-skeleton rows="2" title loading></u-skeleton>
-                                        </view>
-                                        <view v-else-if="item.exams == null">
-                                            <view class="score-box">
-                                                <view style="width:100%;text-align:center;color:rgb(176,185,189)">暂无数据
-                                                </view>
+                        <view v-for="item in scoreList">
+                            <view slot="desc"><text class="title">{{ item.year }} 年 {{ item.semester == '1' ? '上学期' : '下学期' }}</text>
+                                <view class="score-container">
+                                    <view v-if="item.exams != null && item.exams.length == 0">
+                                        <u-skeleton rows="2" title loading></u-skeleton>
+                                    </view>
+                                    <view v-else-if="item.exams == null">
+                                        <view class="score-box">
+                                            <view style="width:100%;text-align:center;color:rgb(176,185,189)">暂无数据
                                             </view>
+                                        </view>
 
-                                        </view>
-                                        <view class="score-box" v-else>
-                                            <u-row justify="space-between">
-                                                <u-col span="6">
-                                                    <view>科目</view>
-                                                </u-col>
-                                                <u-col span="2" textAlign="center">
-                                                    <view>学分</view>
-                                                </u-col>
-                                                <u-col span="2" textAlign="center">
-                                                    <view>成绩</view>
-                                                </u-col>
-                                                <u-col span="2" textAlign="center">
-                                                    <view>绩点</view>
-                                                </u-col>
-                                            </u-row>
-                                            <u-divider :hairline="true"></u-divider>
-                                            <u-row justify="space-between" v-for="exams in item.exams">
-                                                <u-col span="6">
-                                                    <view>{{ exams.exam_name }} {{ exams.exam_regrade_score ? '(补)' :
-                                                        exams.exam_regrade_score ? '(修)' : '' }}</view>
-                                                </u-col>
-                                                <u-col span="2" textAlign="center">
-                                                    <view>{{ exams.exam_credit_points }}</view>
-                                                </u-col>
-                                                <u-col span="2" textAlign="center">
-                                                    <view>{{ exams.exam_regrade_score ? exams.exam_regrade_score + '分' :
-                                                        exams.exam_regrade_score ? exams.exam_regrade_score + '分' :
-                                                            isNaN(exams.exam_score) ? exams.exam_score : exams.exam_score +
-                                                                '分' }}</view>
-                                                </u-col>
-                                                <u-col span="2" textAlign="center">
-                                                    <view>{{ exams.exam_gpa }}</view>
-                                                </u-col>
-                                            </u-row>
-                                        </view>
+                                    </view>
+                                    <view class="score-box" v-else>
+                                        <u-row justify="space-between">
+                                            <u-col span="6">
+                                                <view>科目</view>
+                                            </u-col>
+                                            <u-col span="2" textAlign="center">
+                                                <view>学分</view>
+                                            </u-col>
+                                            <u-col span="2" textAlign="center">
+                                                <view>成绩</view>
+                                            </u-col>
+                                            <u-col span="2" textAlign="center">
+                                                <view>绩点</view>
+                                            </u-col>
+                                        </u-row>
+                                        <u-divider :hairline="true"></u-divider>
+                                        <u-row justify="space-between" v-for="exams in item.exams">
+                                            <u-col span="6">
+                                                <view>{{ exams.exam_name }} {{ exams.exam_makeup_score ? '【补】' :
+                                                    exams.exam_regrade_score ? '【修】' : '' }}</view>
+                                            </u-col>
+                                            <u-col span="2" textAlign="center">
+                                                <view>{{ exams.exam_credit_points }}</view>
+                                            </u-col>
+                                            <u-col span="2" textAlign="center">
+                                                <view>{{ exams.exam_regrade_score ? exams.exam_regrade_score + '分' :
+                                                    exams.exam_regrade_score ? exams.exam_regrade_score + '分' :
+                                                        isNaN(exams.exam_score) ? exams.exam_score : exams.exam_score +
+                                                            '分' }}</view>
+                                            </u-col>
+                                            <u-col span="2" textAlign="center">
+                                                <view>{{ exams.exam_gpa }}</view>
+                                            </u-col>
+                                        </u-row>
                                     </view>
                                 </view>
-                            </u-steps-item>
-                        </u-steps>
+                            </view>
+                            <u-divider color="#fa3534" half-width="200" border-color="#6d6d6d"></u-divider>
+                        </view>
                     </view>
                 </u-col>
             </u-row>
@@ -86,7 +85,7 @@
     </view>
 </template>
 <script>
-import { getExamsList, updateExamsList,checkUserToken } from '../../common/api';
+import { getExamsList, updateExamsList, checkUserToken } from '../../common/api';
 
 export default {
     data() {
@@ -96,19 +95,16 @@ export default {
             scoreList: []
         }
     },
-    onLoad(){
-		this.checkAuth()
-	},
-    async beforeMount() {
-        await this.getScoreData();
+    onLoad() {
+        this.checkAuth()
     },
-    mounted() {
-        this.$forceUpdate();
+    beforeMount() {
+        this.getScoreData();
     },
     methods: {
-        async getScoreData() {
+        getScoreData() {
             let self = this;
-            await uni.getStorage({
+            uni.getStorage({
                 key: 'year',
                 success: async function (res) {
                     let dateNow = new Date();
@@ -139,7 +135,9 @@ export default {
                         })
                     }
                 }
+
             });
+
         },
         async updateScoreData() {
             this.loading = true;
@@ -149,8 +147,9 @@ export default {
                     this.scoreList[i].semester
                 )
             }
-            this.scoreList = []
-            await this.getScoreData();
+
+            this.scoreList = [];
+            this.getScoreData();
             this.loading = false;
         }
     },
@@ -158,9 +157,7 @@ export default {
 </script>
 <style lang="scss">
 .score-container {
-    display: flex;
-    flex-direction: column;
-    padding-right: 10%;
+    width: 100%;
     padding-bottom: 10px;
 }
 
@@ -174,11 +171,12 @@ export default {
 
 .score-box {
     width: 100%;
-    background-color: rgba(113, 173, 225, 0.1);
-    border-radius: 5px;
-    padding: 10px;
+    background-color: rgb(236, 245, 255);
+    border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box;
     color: #123c50;
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
 
 .score-box .u-row {
@@ -192,8 +190,9 @@ export default {
 
 .info {
     font-size: 10px;
-    color: #8f9ca2;
+    color: rgb(96, 98, 102);
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
-}</style>
+}
+</style>

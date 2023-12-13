@@ -2,7 +2,9 @@ from time import localtime
 import re
 
 def getWeeksInfo(text):
-    pattern = r'周([一二三四五六日])第(\d+(?:,\d+)?)节\{第(\d+)-(\d+)周(?:\|(?:单|双)周)?\}'
+    # 单双被忽略了
+    pattern = r'周([一二三四五六日])第(\d+(?:,\d+)?)节\{第(\d+)-(\d+)周?(?:[^{}]+)?\}'
+    print(text)
     matches = re.search(pattern, text)
     day_of_week = matches.group(1)  # 周几
     periods = matches.group(2)      # 节次

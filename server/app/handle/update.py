@@ -82,7 +82,6 @@ async def updateDbCourse(requests, username,cookie):
         
 
     await CoursesAction(requests).Insert(username, res)
-
     return res
 
 

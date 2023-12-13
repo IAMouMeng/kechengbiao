@@ -58,7 +58,7 @@ async def updateCoursesList(request,userInfo):
     responseUpdate = await updateDbCourse(request,userInfo.username,userInfo.cookie)
 
     if not responseUpdate:
-        return response.error("更新失败",400)
+        return response.error("更新失败",401)
     
     await StudentsAction(request).UpdateTime(userInfo,"courses")
     
