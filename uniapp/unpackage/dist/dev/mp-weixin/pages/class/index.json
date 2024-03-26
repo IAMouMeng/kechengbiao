@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "课程表",
+  "usingComponents": {
+    "u-loading-page": "/uni_modules/uview-ui/components/u-loading-page/u-loading-page",
+    "u-modal": "/uni_modules/uview-ui/components/u-modal/u-modal",
+    "u-row": "/uni_modules/uview-ui/components/u-row/u-row",
+    "u-col": "/uni_modules/uview-ui/components/u-col/u-col",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon"
+  }
+}

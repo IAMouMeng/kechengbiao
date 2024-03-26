@@ -2,19 +2,20 @@ from time import localtime
 import re
 
 def getWeeksInfo(text):
-    # 单双被忽略了
-    pattern = r'周([一二三四五六日])第(\d+(?:,\d+)?)节\{第(\d+)-(\d+)周?(?:[^{}]+)?\}'
-    print(text)
+    pattern = r'周([一二三四五六日])第(\d+(?:,\d+)?)节\{第(\d+)-(\d+)周?(?:\|([双单]?)周)?\}'
+    
     matches = re.search(pattern, text)
     day_of_week = matches.group(1)  # 周几
     periods = matches.group(2)      # 节次
     start_week = matches.group(3)   # 开始周
     end_week = matches.group(4)     # 结束周
+        
     return {
         "day":day_of_week,
         "periods":periods.split(","),
         "start":int(start_week),
-        "end":int(end_week)
+        "end":int(end_week),
+        "type":matches.group(5)
     }
 
 
@@ -25,7 +26,7 @@ def getTagContent(html, tag):
 
 
 def trimKeyword(text):
-    blackList = ["早晨","上午","下午","晚上","\xa0"]
+    blackList = ["早晨","上午","中午","下午","晚上","\xa0"]
 
     if not text:
         return True

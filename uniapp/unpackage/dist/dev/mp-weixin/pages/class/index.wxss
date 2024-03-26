@@ -1,0 +1,62 @@
+
+.course-box {
+	padding: 5px 5px;
+	text-align: center;
+}
+.course-box .week {
+	font-size: 13px;
+	font-weight: bold;
+	float: left;
+	margin-left: 10px;
+}
+.course-box .desc {
+	font-size: 10px;
+	margin-top: 5px;
+	margin-left: 10px;
+	color: #8f9ca2;
+}
+.course-grid {
+	height: 980px;
+	background: linear-gradient(to right,
+			rgba(255, 255, 255, 1) 5px,
+			transparent 1px),
+		linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
+	background-size: 10px 70px;
+}
+.today {
+	border-radius: 5px;
+	padding: 2px;
+	background-color: rgba(0, 179, 255, 0.2);
+	box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+.course-date {
+	font-size: 10px;
+	padding: 5px;
+	line-height: 15px;
+	text-align: center;
+}
+.course-number {
+	text-align: center;
+	font-size: 10px;
+	height: 60px;
+	padding: 5px;
+	line-height: 60px;
+}
+.course-period {
+	font-size: 10px;
+	margin-top: 3px;
+	margin-bottom: 6px;
+	padding: 5px;
+	color: white;
+	border-radius: 5px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+		rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+	word-break: break-all;
+	overflow: hidden;
+}
+.course-empty {
+	margin-top: 3px;
+	margin-bottom: 6px;
+	padding: 5px;
+}
+

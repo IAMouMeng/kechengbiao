@@ -1,0 +1,62 @@
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * 使用的时候，请将下面的一行复制到您的uniapp项目根目录的uni.scss中即可
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+view.data-v-3bb5bf6e, scroll-view.data-v-3bb5bf6e, swiper-item.data-v-3bb5bf6e {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  align-items: stretch;
+  align-content: flex-start;
+}
+.u-skeleton.data-v-3bb5bf6e {
+  flex: 1;
+}
+.u-skeleton__wrapper.data-v-3bb5bf6e {
+  display: flex;
+  flex-direction: row;
+}
+.u-skeleton__wrapper__avatar.data-v-3bb5bf6e {
+  background: linear-gradient(90deg, #F1F2F4 25%, #e6e6e6 37%, #F1F2F4 50%);
+  background-size: 400% 100%;
+  margin-right: 15px;
+}
+.u-skeleton__wrapper__avatar--circle.data-v-3bb5bf6e {
+  border-radius: 100px;
+}
+.u-skeleton__wrapper__avatar--square.data-v-3bb5bf6e {
+  border-radius: 4px;
+}
+.u-skeleton__wrapper__content.data-v-3bb5bf6e {
+  flex: 1;
+}
+.u-skeleton__wrapper__content__rows.data-v-3bb5bf6e, .u-skeleton__wrapper__content__title.data-v-3bb5bf6e {
+  background: linear-gradient(90deg, #F1F2F4 25%, #e6e6e6 37%, #F1F2F4 50%);
+  background-size: 400% 100%;
+  border-radius: 3px;
+}
+.animate.data-v-3bb5bf6e {
+  -webkit-animation: skeleton-data-v-3bb5bf6e 1.8s ease infinite;
+          animation: skeleton-data-v-3bb5bf6e 1.8s ease infinite;
+}
+@-webkit-keyframes skeleton-data-v-3bb5bf6e {
+0% {
+    background-position: 100% 50%;
+}
+100% {
+    background-position: 0 50%;
+}
+}
+@keyframes skeleton-data-v-3bb5bf6e {
+0% {
+    background-position: 100% 50%;
+}
+100% {
+    background-position: 0 50%;
+}
+}
+

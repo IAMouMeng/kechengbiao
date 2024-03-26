@@ -25,20 +25,27 @@
             <u-row customStyle="margin-top:20px;margin-bottom: 10px;padding:10px 30px;">
                 <u-col>
                     <view>
-                        <view v-for="item in scoreList">
+                        <view v-for="(item, scoreIndex) in scoreList" :key="scoreIndex">
                             <view class="score-box">
                                 <view class="header" :style="{ backgroundColor: mathColor() }">
-                                    <view class="title">{{ item.year }} 年 {{ item.semester == '1' ? '上学期' : '下学期' }}</view>
+                                    <view class="title">
+                                        <view style="float:left">
+                                            {{ parseInt(item.year.toString().slice(-2)) }} -
+                                            {{ parseInt(item.year.toString().slice(-2)) + 1 }} 学年
+                                        </view>
+                                        <view style="float:right">{{ item.semester == '1' ? '上学期' : '下学期'}}
+                                        </view>
+                                    </view>
                                 </view>
                                 <view class="main" v-if="item.exams != null && item.exams.length == 0">
                                     <u-skeleton rows="2" title loading></u-skeleton>
                                 </view>
-                                <view class="main" v-else-if="item.exams == null">
+                                <!-- <view class="main" v-else-if="item.exams == null">
                                     <view style="width:100%;text-align:center;color:rgb(176,185,189)">暂无数据
                                     </view>
-                                </view>
+                                </view> -->
 
-                                <view class="main" v-else>
+                                <view class="main" v-if="item.exams != null">
                                     <view class="info-container">
                                         <view class="item" style="text-align:left;">
                                             <view class="title">当前数据</view>
@@ -51,7 +58,7 @@
                                                 {{ item.exams.reduce((acc, obj) => {
                                                     const numericValue = parseFloat(obj.exam_credit_points);
                                                     const intValue = isNaN(numericValue) ? 0 : Math.round(numericValue * 100);
-                                                    return (acc * 100 + intValue) / 100;
+                                                    return ((acc * 100 + intValue) / 100).toFixed(1);
                                                 }, 0) }}</view>
 
                                         </view>
@@ -61,7 +68,7 @@
                                                 {{ item.exams.reduce((acc, obj) => {
                                                     const numericValue = parseFloat(obj.exam_gpa);
                                                     const intValue = isNaN(numericValue) ? 0 : Math.round(numericValue * 100);
-                                                    return (acc * 100 + intValue) / 100;
+                                                    return ((acc * 100 + intValue) / 100).toFixed(1);
                                                 }, 0) }}
                                             </view>
                                         </view>
@@ -81,7 +88,7 @@
                                         </u-col>
                                     </u-row>
                                     <u-divider :hairline="true"></u-divider>
-                                    <u-row justify="space-between" v-for="exams in item.exams">
+                                    <u-row justify="space-between" v-for="(exams,examIndex) in item.exams" :key="examIndex">
                                         <u-col span="6">
                                             <view>{{ exams.exam_name }} {{ exams.exam_makeup_score ? '【补】' :
                                                 exams.exam_regrade_score ? '【修】' : '' }}</view>
@@ -91,7 +98,7 @@
                                         </u-col>
                                         <u-col span="2" textAlign="center">
                                             <view>{{ exams.exam_regrade_score ? exams.exam_regrade_score + '分' :
-                                                exams.exam_regrade_score ? exams.exam_regrade_score + '分' :
+                                                exams.exam_makeup_score ? exams.exam_makeup_score + '分' :
                                                     isNaN(exams.exam_score) ? exams.exam_score : exams.exam_score +
                                                         '分' }}</view>
                                         </u-col>
@@ -139,10 +146,16 @@ export default {
 
                     for (let year = yearNow; year >= res.data; year--) {
                         let semester = ["2", "1"];
-                        if (year == yearNow && monthNow >= 6 && monthNow <= 12) {
-                            semester.splice(0, 1);
 
+                        if (yearNow == year && monthNow >= 1) {
+                            semester = ["1"];
                         }
+
+                        if (semester.length == 0 || monthNow >= 7) {
+                            semester = ["2", "1"];
+                        }
+
+
                         semester.forEach((item) => {
                             self.scoreList.push({
                                 "year": year,
@@ -216,6 +229,7 @@ export default {
 }
 
 .score-box .header .title {
+    width: 100%;
     font-size: 15px;
     font-weight: bold;
     color: #ffffff;
@@ -257,5 +271,4 @@ export default {
     text-align: center;
     padding-bottom: 10px;
 }
-
 </style>

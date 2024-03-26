@@ -42,8 +42,9 @@ async def updateDbCourse(requests, username,cookie):
     system.cookie = cookie
 
     data = system.GetCourses()
+    print("1111",data)
 
-    if not data:
+    if not data and data != []:
         return False
 
     weekC2E = {

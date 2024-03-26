@@ -18,7 +18,7 @@
 		<view v-else class="course-box">
 			<view>
 				<u-modal :show="firstUseModel.show" @confirm="confirmModel()" :title="firstUseModel.title"
-					:content='firstUseModel.content' :confirmText="firstUseModel.confirmText"></u-modal>
+					:content="firstUseModel.content" :confirmText="firstUseModel.confirmText"></u-modal>
 			</view>
 			<u-row justify="space-between" gutter="10">
 				<u-col span="6">
@@ -33,17 +33,17 @@
 				<u-col span="6">
 					<u-row justify="space-between">
 						<u-col span="4" @click="updateCourses">
-							<view style="float:right;margin-right: 10px;"><u-icon name="reload" color="#679fff"
+							<view style="float: right; margin-right: 10px"><u-icon name="reload" color="#679fff"
 									size="20"></u-icon>
 							</view>
 						</u-col>
 						<u-col span="4" @click="shareCourse">
-							<view style="float:right;margin-right: 10px;"><u-icon name="share" color="#679fff"
+							<view style="float: right; margin-right: 10px"><u-icon name="share" color="#679fff"
 									size="20"></u-icon>
 							</view>
 						</u-col>
 						<u-col span="4">
-							<picker style="float:right;margin-right: 10px;" @change="setWeek" :value="showWeek - 1"
+							<picker style="float: right; margin-right: 10px" @change="setWeek" :value="showWeek - 1"
 								:range="weeks" range-key="name">
 								<view><u-icon name="setting" color="#679fff" size="20"></u-icon>
 								</view>
@@ -52,8 +52,6 @@
 					</u-row>
 				</u-col>
 			</u-row>
-
-			<!-- v-for 布局动态生成有问题 暂未解决 -->
 			<u-row justify="space-between" gutter="0">
 				<u-col span="1">
 					<view class="course-date">
@@ -63,17 +61,18 @@
 				</u-col>
 				<u-col v-for="(day, index) in ['一', '二', '三', '四', '五', '六', '日']" :key="index" span="1.5">
 					<view class="course-date">
-						<view :class="weekList.weekStart + index == weekList.todayWeek ? 'today' : ''">
+						<view :class="`${weekList.month}/${weekList.todayWeek}` == getDayOfWeekDate(index + 1) ? 'today' : ''
+							">
 							<view>{{ day }}</view>
-							<view>{{ weekList.month }}/{{ weekList.weekStart + index }}</view>
+							<view>{{ getDayOfWeekDate(index + 1) }}</view>
 						</view>
 					</view>
 				</u-col>
 			</u-row>
-			<view style="margin-top: 5px;">
+			<view style="margin-top: 5px">
 				<u-row align="top" justify="space-between">
 					<u-col span="1" class="course">
-						<view v-for="count in 14" class="course-number">
+						<view v-for="count in 14" :key="count" class="course-number">
 							{{ count + 1 }}
 						</view>
 					</u-col>
@@ -81,15 +80,16 @@
 						<view class="course-grid">
 							<u-row align="top" gutter="3" justify="space-between">
 								<view class="bg"></view>
-								<u-col v-for="(day, index) in ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']"
+								<u-col v-for="(day, index) in ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun',]"
 									:key="index" span="1.61">
-									<view v-for="(item, itemIndex) in courseList[day]"
-										:class="item.isCourse == 1 ? 'course-period' : 'course-empty'" :style="{
-											height: mathHeight(item.blocks),
-											backgroundColor: item.isCourse == 1 ? mathColor() : 'transparent',
-										}">
-										<view v-if="item.isCourse">
-											{{ item.name }}<br />@{{ item.classroom }}<br />{{ item.teacher }}
+									<view v-for="(item, itemIndex) in courseList[day]" :key="itemIndex">
+										<view :class="item.isCourse ? 'course-period' : 'course-empty'" :key="itemIndex"
+											:style="{ height: mathHeight(item.blocks), backgroundColor: item.isCourse ? mathColor() : 'transparent', }">
+											<view v-if="item.isCourse">
+												{{ item.name }}<br />@{{ item.classroom }}<br />{{
+													item.teacher
+												}}
+											</view>
 										</view>
 									</view>
 								</u-col>
@@ -134,7 +134,7 @@
 .today {
 	border-radius: 5px;
 	padding: 2px;
-	background-color: rgba(0, 179, 255, 0.3);
+	background-color: rgba(0, 179, 255, 0.2);
 	box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
 
@@ -160,7 +160,8 @@
 	padding: 5px;
 	color: white;
 	border-radius: 5px;
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+		rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 	word-break: break-all;
 	overflow: hidden;
 }
@@ -172,48 +173,58 @@
 }
 </style>
 <script>
-import { getCoursesList, updateCoursesList, checkUserToken } from '../../common/api'
+import { getCoursesList, updateCoursesList, getSystemInfo } from "../../common/api";
 
 export default {
 	data() {
 		return {
 			firstUseModel: {
 				show: false,
-				title: '注意',
-				content: '您的账号密码储存于您本机微信 localStorage 内，我们不会私自储存您的密码。课程表处于实验阶段，请您谨慎使用！！！',
-				confirmText: '知道啦！'
+				title: "公告",
+				content: "",
+				confirmText: "知道啦！",
 			},
 			weekList: {
-				"month": 0,
-				"weekStart": 0,
-				"todayWeek": 0,
+				month: 0,
+				todayWeek: 0,
 			},
 			loading: false,
-			semester: '',
+			semester: "",
 			todayWeek: 1,
 			showWeek: 1,
 			weeks: [],
 			coursNew: {},
 			courseList: {},
-		}
+		};
 	},
 	async mounted() {
-		const storageConfirm = await this.getStorage('confirm');
-		if (!storageConfirm) {
+
+		const res = await getSystemInfo();
+
+		const storageConfirm = await this.getStorage("confirm");
+		const storageNotice = await this.getStorage("notice");
+
+		if (!storageConfirm || (res.notice != "" && storageNotice != res.notice)) {
+			this.firstUseModel.content = res.notice;
 			this.firstUseModel.show = true;
+			await this.setStorage("notice", res.notice);
 		}
 
-		const storageTodayWeek = await this.getStorage('toadyWeek');
+		const storageTodayWeek = await this.getStorage("toadyWeek");
+
 		if (storageTodayWeek) {
 			this.todayWeek = storageTodayWeek;
 			this.showWeek = storageTodayWeek;
+		} else {
+			this.todayWeek = res.week;
+			this.showWeek = res.week;
 		}
 
-		const storageCoursNew = await this.getStorage('coursNew');
+		const storageCoursNew = await this.getStorage("coursNew");
 		if (storageCoursNew) {
 			this.coursNew = storageCoursNew;
 		} else {
-			await this.getCoursesList()
+			await this.getCoursesList();
 		}
 
 		this.editSemester();
@@ -221,32 +232,28 @@ export default {
 
 		this.genCourseList(this.coursNew);
 	},
-	onLoad(){
-		this.checkAuth()
+	onLoad() {
+		this.checkAuth();
 	},
 	async onShow() {
-
 		const dateNow = new Date();
 
 		// 更新 日期
 		this.weekList.month = dateNow.getMonth() + 1;
 		this.weekList.todayWeek = dateNow.getDate();
-		this.weekList.weekStart = new Date(
-			dateNow.getFullYear(),
-			dateNow.getMonth(),
-			dateNow.getDate() + 1 - dateNow.getDay() || 7
-		).getDate();
 
-		// 自动切换周 (可能有BUG)
 		let start = await this.getStorage("start");
-		let todayWeek = await this.getStorage('toadyWeek');
+		let todayWeek = await this.getStorage("toadyWeek");
 
 		if (!start) {
-			await this.setStorage("start", new Date(
-				dateNow.getFullYear(),
-				dateNow.getMonth(),
-				dateNow.getDate() + 1 - dateNow.getDay() || 7
-			));
+			await this.setStorage(
+				"start",
+				new Date(
+					dateNow.getFullYear(),
+					dateNow.getMonth(),
+					dateNow.getDate() + 1 - dateNow.getDay() || 7
+				)
+			);
 			return;
 		}
 
@@ -261,23 +268,20 @@ export default {
 		if (newWeek > 20) {
 			newWeek = 20;
 		} else if (!newWeek) {
-			newWeek = 1
+			newWeek = 1;
 		}
 
 		if (newWeek !== todayWeek) {
-			this.setWeek(
-				{
-					detail: {
-						value: + newWeek - 1
-					}
-				}
-			)
+			this.setWeek({
+				detail: {
+					value: +newWeek - 1,
+				},
+			});
 
 			uni.reLaunch({
-				url: '/pages/class/index'
+				url: "/pages/class/index",
 			});
 		}
-
 	},
 	methods: {
 		async getStorage(key) {
@@ -294,25 +298,31 @@ export default {
 			try {
 				uni.setStorageSync(key, data);
 			} catch (error) {
-				console.log("Set key error!!!!")
+				console.log("Set key error!!!!");
 			}
 		},
 		jumpToLoginPage() {
 			uni.navigateTo({
-				url: '/pages/login/index'
+				url: "/pages/login/index",
 			});
 		},
 		confirmModel() {
 			this.firstUseModel.show = false;
-			this.setStorage('confirm', '1');
+			this.setStorage("confirm", "1");
 		},
 		editSemester() {
 			const dateNow = new Date();
 			const yearNow = dateNow.getFullYear();
 			const monthNow = dateNow.getMonth() + 1;
 			const semester = monthNow >= 8 || monthNow == 1 ? 1 : 2;
-			this.semester = `${yearNow}-${yearNow + 1} 第${semester}学期 ${this.todayWeek == this.showWeek ? '(本周)' : '(非本周)'
-				}`;
+
+			if (monthNow >= 2 && monthNow <= 8) {
+				this.semester = `${yearNow - 1}-${yearNow} 第${semester}学期 ${this.todayWeek == this.showWeek ? "(本周)" : "(非本周)"
+					}`;
+			} else {
+				this.semester = `${yearNow}-${yearNow + 1} 第${semester - 1}学期 ${this.todayWeek == this.showWeek ? "(本周)" : "(非本周)"
+					}`;
+			}
 		},
 		async updateCourses() {
 			this.loading = true;
@@ -325,8 +335,9 @@ export default {
 		},
 		shareCourse() {
 			uni.showModal({
-				title: "巴拉巴拉，这个功能还没做好（主要是还得交300认证费），需要分享请点击右上角那三个点，转发给你的盆友们就好啦！"
-			})
+				title:
+					"巴拉巴拉，这个功能还没做好（主要是还得交300认证费），需要分享请点击右上角那三个点，转发给你的盆友们就好啦！",
+			});
 		},
 		async changeWeek(e) {
 			// 切换周生成时间下一版本再更新 先研究一段时间
@@ -339,18 +350,21 @@ export default {
 			const newWeek = parseInt(e.detail.value) + 1;
 			if (newWeek != this.todayWeek) {
 				const dateNow = new Date();
-				this.setStorage("start", new Date(
-					dateNow.getFullYear(),
-					dateNow.getMonth(),
-					dateNow.getDate() + 1 - dateNow.getDay() || 7
-				));
+				this.setStorage(
+					"start",
+					new Date(
+						dateNow.getFullYear(),
+						dateNow.getMonth(),
+						dateNow.getDate() + 1 - dateNow.getDay() || 7
+					)
+				);
 				this.todayWeek = newWeek;
 				this.initWeeksList(20);
 				this.changeWeek(e);
-				this.setStorage('toadyWeek', newWeek);
+				this.setStorage("toadyWeek", newWeek);
 				uni.showToast({
 					title: `当前周已切换为第 ${this.showWeek} 周`,
-					icon: 'none',
+					icon: "none",
 				});
 			}
 		},
@@ -365,23 +379,69 @@ export default {
 		},
 		initWeeksList(num) {
 			this.weeks = Array.from({ length: num }, (_, i) => ({
-				name: i + 1 !== this.todayWeek ? `第 ${i + 1} 周` : `第 ${i + 1} 周 (本周)`,
+				name:
+					i + 1 !== this.todayWeek ? `第 ${i + 1} 周` : `第 ${i + 1} 周 (本周)`,
 			}));
+		},
+		getDayOfWeekDate(dayOfWeek) {
+			const today = new Date();
+			const todayDayOfWeek = today.getDay(); // 0表示星期日，1表示星期一，以此类推
+			const diff = dayOfWeek - todayDayOfWeek;
+			const targetDate = new Date(today.setDate(today.getDate() + diff));
+			return `${targetDate.getMonth() + 1}/${targetDate.getDate()}`
+		},
+		checkIsEmpty(item) {
+			// console.log(item)
+			if (item.isCourse == 1) {
+				if (item.info.type == "双") {
+					if (this.showWeek % 2 === 0) {
+						return 'course-period'
+					}
+					return 'none'
+				}
+
+				if (item.info.type == "单") {
+					if (this.showWeek % 2 !== 0) {
+						return 'course-period'
+					}
+					return 'none'
+				}
+
+				if (!item.info.type) {
+					return 'course-period';
+				}
+
+			} else {
+				return 'course-empty';
+			}
+			// return 'course-period'
 		},
 		initCourseList() {
 			this.courseList = {
-				"Mon": [],
-				"Tues": [],
-				"Wed": [],
-				"Thur": [],
-				"Fri": [],
-				"Sat": [],
-				"Sun": []
-			}
+				Mon: [],
+				Tues: [],
+				Wed: [],
+				Thur: [],
+				Fri: [],
+				Sat: [],
+				Sun: [],
+			};
 		},
 		checkAndCount(key, item) {
 			if (this.showWeek < item.info.start || this.showWeek > item.info.end) {
 				return true;
+			}
+
+			if (item.info.type == "双") {
+				if (this.showWeek % 2 !== 0) {
+					return true
+				}
+			}
+
+			if (item.info.type == "单") {
+				if (this.showWeek % 2 === 0) {
+					return true
+				}
 			}
 			for (const course of this.courseList[key]) {
 				if (
@@ -393,7 +453,7 @@ export default {
 				) {
 					course.blocks += item.info.periods.length;
 					course.info.periods = course.info.periods.concat(item.info.periods);
-					return true;
+					return true
 				}
 			}
 			return false;
@@ -406,8 +466,8 @@ export default {
 			if (res.length === 0) {
 				uni.showToast({
 					title: `暂无数据`,
-					icon: 'none',
-				})
+					icon: "none",
+				});
 				return [];
 			}
 
@@ -424,12 +484,11 @@ export default {
 			for (const [key, value] of Object.entries(data)) {
 				value.forEach((item) => {
 					if (!this.checkAndCount(key, item)) {
-						console.log("3-->",value);
 						item.blocks = item.info.periods.length;
 						item.isCourse = 1;
 						this.courseList[key].push(item);
 					}
-				})
+				});
 			}
 			// 插入间隔
 			for (const key of Object.keys(this.courseList)) {
@@ -437,7 +496,9 @@ export default {
 				for (let i = 0; i < this.courseList[key].length; i++) {
 					const count =
 						i > 0
-							? this.courseList[key][i].info.periods[0] - this.courseList[key][i - 1].info.periods.slice(-1) - 1
+							? this.courseList[key][i].info.periods[0] -
+							this.courseList[key][i - 1].info.periods.slice(-1) -
+							1
 							: this.courseList[key][i].info.periods[0] - 1;
 					if (count >= 2) {
 						newList.push({ blocks: count, isCourse: 0 });
@@ -446,7 +507,7 @@ export default {
 				}
 				this.courseList[key] = newList;
 			}
-		}
-	}
-}
+		},
+	},
+};
 </script>

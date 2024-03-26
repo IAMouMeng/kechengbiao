@@ -30,4 +30,4 @@ require('./util/request/index')(app)
 
 app.$mount()
 
-console.log("Author: Mr.Sun\nMail: iamoumeng@aliyun.com\nVersion: 1.0.0")
+console.log("Author: Mr.Sun\nMail: iamoumeng@aliyun.com")

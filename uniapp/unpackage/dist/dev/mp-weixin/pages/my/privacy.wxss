@@ -1,0 +1,33 @@
+
+.title {
+    margin-top: 10px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+.content {
+    box-sizing: border-box;
+    padding: 20px;
+}
+.content .title-1 {
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 50px;
+}
+.content .text{
+    float: left;
+    text-indent: 2em;
+    color: #232323;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.content .name{
+    float: left;
+    font-size: 16px;
+    font-weight: bolder;
+    margin-top: 30px;
+    padding-bottom: 100px;
+}
+

@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/class/index",
+    "pages/score/index",
+    "pages/my/index",
+    "pages/my/info",
+    "pages/my/privacy",
+    "pages/login/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uView",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#465CFF",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/class/index",
+        "text": "课程表",
+        "iconPath": "static/images/tabbar/layout_default_3x.png",
+        "selectedIconPath": "static/images/tabbar/layout_selected_3x.png"
+      },
+      {
+        "pagePath": "pages/score/index",
+        "text": "成绩单",
+        "iconPath": "static/images/tabbar/mod_default_3x.png",
+        "selectedIconPath": "static/images/tabbar/mod_selected_3x.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "static/images/tabbar/my_default_3x.png",
+        "selectedIconPath": "static/images/tabbar/my_selected_3x.png"
+      }
+    ]
+  },
+  "preloadRule": {},
+  "usingComponents": {}
+}

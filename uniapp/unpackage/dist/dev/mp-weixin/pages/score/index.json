@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "成绩单",
+  "usingComponents": {
+    "u-loading-page": "/uni_modules/uview-ui/components/u-loading-page/u-loading-page",
+    "u-row": "/uni_modules/uview-ui/components/u-row/u-row",
+    "u-col": "/uni_modules/uview-ui/components/u-col/u-col",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-skeleton": "/uni_modules/uview-ui/components/u-skeleton/u-skeleton",
+    "u-divider": "/uni_modules/uview-ui/components/u-divider/u-divider"
+  }
+}

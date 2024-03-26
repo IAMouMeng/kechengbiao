@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "教务系统登录",
+  "usingComponents": {
+    "isszz-captcha": "/uni_modules/isszz-captcha/components/isszz-captcha/isszz-captcha"
+  }
+}

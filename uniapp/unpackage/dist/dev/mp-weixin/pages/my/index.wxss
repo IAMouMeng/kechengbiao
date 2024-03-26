@@ -1,0 +1,85 @@
+
+.head {
+  height: 140rpx;
+}
+
+/* 用户信息部分 */
+.user-info-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 300rpx;
+}
+.avatar-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 40rpx;
+}
+.avatar-box .avatar {
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 116rpx;
+}
+.avatar-box .avatar-text {
+  float: right;
+  padding-left: 20rpx;
+}
+.avatar-text .name {
+  font-size: 50rpx;
+  font-weight: 500;
+  color: #000002;
+}
+.avatar-text .desc {
+  color: #a0a1a3;
+  padding-top: 10rpx;
+  font-size: 30rpx;
+}
+.arrow-box {
+  width: 20rpx;
+  height: 20rpx;
+  border-top: 3rpx solid #a9acb3;
+  border-right: 3rpx solid #a9acb3;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  margin-right: 40rpx;
+}
+.usual-ability-box {
+  background-color: #fff;
+  padding: 0rpx 35rpx 55rpx 55rpx;
+}
+
+/* 常用功能 */
+.usual-ability-title {
+  margin-top: 15rpx;
+  font-size: 35rpx;
+  font-weight: 700;
+  margin-bottom: 30rpx;
+}
+.usual-ability-content {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.usual-ability-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 160rpx;
+  height: 160rpx;
+}
+.usual-ability-item image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-bottom: 25rpx;
+}
+.usual-ability-item-text {
+  font-size: 25rpx;
+  font-weight: 400;
+}
+

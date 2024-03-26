@@ -1,0 +1,60 @@
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * 使用的时候，请将下面的一行复制到您的uniapp项目根目录的uni.scss中即可
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+view.data-v-498e50fb, scroll-view.data-v-498e50fb, swiper-item.data-v-498e50fb {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  align-items: stretch;
+  align-content: flex-start;
+}
+.u-col.data-v-498e50fb {
+  padding: 0;
+  box-sizing: border-box;
+  display: block;
+}
+.u-col-0.data-v-498e50fb {
+  width: 0;
+}
+.u-col-1.data-v-498e50fb {
+  width: calc(100%/12);
+}
+.u-col-2.data-v-498e50fb {
+  width: calc(100%/12 * 2);
+}
+.u-col-3.data-v-498e50fb {
+  width: calc(100%/12 * 3);
+}
+.u-col-4.data-v-498e50fb {
+  width: calc(100%/12 * 4);
+}
+.u-col-5.data-v-498e50fb {
+  width: calc(100%/12 * 5);
+}
+.u-col-6.data-v-498e50fb {
+  width: calc(100%/12 * 6);
+}
+.u-col-7.data-v-498e50fb {
+  width: calc(100%/12 * 7);
+}
+.u-col-8.data-v-498e50fb {
+  width: calc(100%/12 * 8);
+}
+.u-col-9.data-v-498e50fb {
+  width: calc(100%/12 * 9);
+}
+.u-col-10.data-v-498e50fb {
+  width: calc(100%/12 * 10);
+}
+.u-col-11.data-v-498e50fb {
+  width: calc(100%/12 * 11);
+}
+.u-col-12.data-v-498e50fb {
+  width: calc(100%/12 * 12);
+}
+
